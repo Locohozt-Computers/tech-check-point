@@ -1,3 +1,4 @@
+import AuthButton from "components/ui/AuthButton";
 import CustomButton from "components/ui/CustomButton";
 import InputWithLabel from "components/ui/InputWithLabel";
 import React from "react";
@@ -41,6 +42,7 @@ const SignInComponent = () => {
             Forgot <span>Password</span>?
           </p>
         </div>
+        <AuthButton label="Google" onClick={() => {}} style={{marginTop: 20}} />
       </Form>
     </Container>
   );

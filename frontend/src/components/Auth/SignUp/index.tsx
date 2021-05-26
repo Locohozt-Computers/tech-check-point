@@ -1,8 +1,10 @@
+import React from "react";
+
 import CustomButton from "components/ui/CustomButton";
 import InputWithLabel from "components/ui/InputWithLabel";
-import React from "react";
 import { useHistory } from "react-router";
 import { Container, Form } from "./style";
+import AuthButton from "components/ui/AuthButton";
 
 const SignUpComponent = () => {
     const history = useHistory();
@@ -55,6 +57,7 @@ const SignUpComponent = () => {
             <span onClick={() => history.push("/auth/signin")}>Signin</span>
           </p>
         </div>
+        <AuthButton label="Google" onClick={() => {}} style={{marginTop: 20}} />
       </Form>
     </Container>
   );
