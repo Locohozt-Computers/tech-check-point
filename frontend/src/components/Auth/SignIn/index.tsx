@@ -1,12 +1,14 @@
+import React, { useState } from "react";
 import AuthButton from "components/ui/AuthButton";
 import CustomButton from "components/ui/CustomButton";
 import InputWithLabel from "components/ui/InputWithLabel";
-import React from "react";
+import CustomSwitch from "components/ui/Switch";
 import { useHistory } from "react-router";
 import { Container, Form } from "./style";
 
 const SignInComponent = () => {
   const history = useHistory();
+  const [isAgent, setIsAgent] = useState(false)
 
   return (
     <Container>
@@ -28,6 +30,7 @@ const SignInComponent = () => {
             marginBottom: 30,
           }}
         />
+        <CustomSwitch checked={isAgent} onChange={(value) => setIsAgent(value)} label={isAgent ? "Agent" : "User"} style={{marginBottom: 30}} />
         <CustomButton
           label="Submit"
           onClick={() => {}}
@@ -42,7 +45,7 @@ const SignInComponent = () => {
             Forgot <span>Password</span>?
           </p>
         </div>
-        <AuthButton label="Google" onClick={() => {}} style={{marginTop: 20}} />
+        <AuthButton label="Continue With Google" onClick={() => {}} style={{marginTop: 20}} />
       </Form>
     </Container>
   );

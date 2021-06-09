@@ -10,3 +10,5 @@ export const createHttp = async (path: string, payload: any) => {
 
   return response?.data?.data
 }
+
+export const createResponseType = typeof createHttp

@@ -1,16 +1,10 @@
-import React, { createContext, PropsWithChildren, ReactNode, useReducer } from 'react'
+import React, { createContext, useReducer } from 'react'
+import { ChangePasswordType, SigninUserType, SignupUserType } from 'types/authTypes'
 import { createHttp } from 'utils/api/createHttp'
 import authReducer from './Authreducer'
 
-type UserType = {
-    name: string;
-    username: string;
-    email: string;
-    password: string;
-}
-
-export type InitialStateTypes = {
-    user: UserType | any
+export type InitialStateTypes<T> = {
+    user: T
 }
 
 const initialState = {
@@ -22,26 +16,46 @@ export const SIGNUP = 'SIGNIN'
 
 export const AuthContext = createContext({
     user: null,
-    signInUserContext: (user: any) => {},
-    signUpUserContext: (user: any) => {},
+    signInUserContext: (user: SigninUserType) => {},
+    signUpUserContext: (user: Partial<SignupUserType>) => {},
+    forgotPasswordContext: (password: string) => {},
+    changePasswordContext: (password: ChangePasswordType) => {},
 
 })
 
 const AuthProvider: React.FC = ({children}) => {
     const [state, dispatch] = useReducer(authReducer, initialState)
 
-    const signInUserContext = async (user: Partial<UserType>) => {
+    const signInUserContext = async (user: SigninUserType) => {
         try {
-            const data = await createHttp('/', user)
+            const data = await createHttp('/login', user)
             dispatch({type: SIGNIN, payload: data})
         } catch (error) {
             throw error
         }
     }
 
-    const signUpUserContext = async (user: Partial<UserType>) => {
+    const signUpUserContext = async (user: Partial<SignupUserType>) => {
         try {
-            const data = await createHttp('/', user)
+            const data = await createHttp('/register', user)
+            dispatch({type: SIGNUP, payload: data})
+        } catch (error) {
+            throw error
+        }
+    }
+
+    const forgotPasswordContext = async (password: string) => {
+        try {
+            const data = await createHttp('/forgotpassword', password)
+            dispatch({type: SIGNUP, payload: data})
+        } catch (error) {
+            throw error
+        }
+    }
+
+    const changePasswordContext = async (password: ChangePasswordType) => {
+        try {
+            const data = await createHttp('/changepassword', password)
             dispatch({type: SIGNUP, payload: data})
         } catch (error) {
             throw error
@@ -51,7 +65,9 @@ const AuthProvider: React.FC = ({children}) => {
     const values = {
         user: state?.user,
         signInUserContext,
-        signUpUserContext
+        signUpUserContext,
+        forgotPasswordContext,
+        changePasswordContext
     }
     return (
         <AuthContext.Provider value={values}> 

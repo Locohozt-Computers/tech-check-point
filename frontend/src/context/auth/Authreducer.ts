@@ -1,7 +1,6 @@
-import React from 'react'
 import { InitialStateTypes, SIGNIN } from './AuthProvider'
 
-const authReducer = (state: InitialStateTypes, action: any) => {
+const authReducer = (state: InitialStateTypes<any>, action: any) => {
     switch(action.type) {
         case SIGNIN: 
             return {

@@ -5,6 +5,7 @@ import InputWithLabel from "components/ui/InputWithLabel";
 import { useHistory } from "react-router";
 import { Container, Form } from "./style";
 import AuthButton from "components/ui/AuthButton";
+import CustomSwitch from "components/ui/Switch";
 
 const SignUpComponent = () => {
     const history = useHistory();
@@ -45,6 +46,7 @@ const SignUpComponent = () => {
             marginBottom: 30,
           }}
         />
+        <CustomSwitch checked={true} onChange={() => {}} style={{marginBottom: 30}} />
         <CustomButton
           label="Submit"
           onClick={() => {}}
@@ -57,7 +59,7 @@ const SignUpComponent = () => {
             <span onClick={() => history.push("/auth/signin")}>Signin</span>
           </p>
         </div>
-        <AuthButton label="Google" onClick={() => {}} style={{marginTop: 20}} />
+        <AuthButton label="Continue With Google" onClick={() => {}} style={{marginTop: 20}} />
       </Form>
     </Container>
   );

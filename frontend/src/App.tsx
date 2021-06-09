@@ -3,6 +3,9 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 import SignInPage from 'pages/Signin';
 import SignUpPage from 'pages/Signup';
+import axios from 'axios';
+
+axios.defaults.baseURL = process.env.REACT_APP_API_BASEURL
 
 function App() {
   return (

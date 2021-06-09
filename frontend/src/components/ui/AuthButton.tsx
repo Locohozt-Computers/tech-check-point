@@ -30,7 +30,7 @@ const AuthButton: FC<Props> = ({
         background={background}
         type={type}
       >
-        <img src={google} alt="google icon" width="18px" /> <span>{label}</span>
+        <img src={google} alt="google icon" width="20px" /> <span>{label}</span>
       </Button>
     </div>
   );
