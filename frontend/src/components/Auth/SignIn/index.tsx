@@ -8,7 +8,7 @@ import { Container, Form } from "./style";
 
 const SignInComponent = () => {
   const history = useHistory();
-  const [isAgent, setIsAgent] = useState(false)
+  const [isAgent, setIsAgent] = useState(false);
 
   return (
     <Container>
@@ -30,7 +30,12 @@ const SignInComponent = () => {
             marginBottom: 30,
           }}
         />
-        <CustomSwitch checked={isAgent} onChange={(value) => setIsAgent(value)} label={isAgent ? "Agent" : "User"} style={{marginBottom: 30}} />
+        <CustomSwitch
+          checked={isAgent}
+          onChange={(value) => setIsAgent(value)}
+          label={isAgent ? "Agent" : "User"}
+          style={{ marginBottom: 30 }}
+        />
         <CustomButton
           label="Submit"
           onClick={() => {}}
@@ -42,10 +47,18 @@ const SignInComponent = () => {
             <span onClick={() => history.push("/auth/signup")}>Signup</span>
           </p>
           <p className="forgot-password">
-            Forgot <span>Password</span>?
+            Forgot{" "}
+            <span onClick={() => history.push("/auth/resetpassword")}>
+              Password
+            </span>
+            ?
           </p>
         </div>
-        <AuthButton label="Continue With Google" onClick={() => {}} style={{marginTop: 20}} />
+        <AuthButton
+          label="Continue With Google"
+          onClick={() => {}}
+          style={{ marginTop: 20 }}
+        />
       </Form>
     </Container>
   );
