@@ -1,9 +1,9 @@
 import React from "react";
-import { fireEvent, render, screen, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import SignInComponent from "..";
-import { act } from "react-dom/test-utils";
 import { useFormik } from "formik";
 import { SigninUserType } from "types/authTypes";
+import { act } from "react-dom/test-utils";
 
 describe("Render Signin Component", () => {
   let formik: any;
@@ -37,20 +37,22 @@ describe("Render Signin Component", () => {
 
     expect(values.email).toEqual("test@gmail.com");
   });
-//   test("Test if email is correct", async () => {
-//     const onSubmit = jest.fn();
+  test("Test if input fields have correct", async () => {
+    const handleSubmit = jest.fn();
 
-//     render(<SignInComponent onSubmit={onSubmit} />);
+    render(<SignInComponent onSubmit={handleSubmit} />);
 
-//     const form = screen.getByTestId("sign-in-form");
+    const form = screen.getByTestId("sign-in-form");
+    const emailInput = screen.getByPlaceholderText("Enter Email");
+    const passwordInput = screen.getByPlaceholderText("Enter Password");
 
-//     act(() => {
-//       fireEvent.submit(form);
-//     });
+    await act(async () => {
+      fireEvent.change(emailInput, { target: { value: "test@gmail.com" } });
+      fireEvent.change(passwordInput, { target: { value: "123456" } });
+      fireEvent.submit(form);
+    });
 
-//     await waitForElementToBeRemoved(async () => {
-//       expect(await onSubmit).toHaveBeenCalled();
-//       expect(await onSubmit).toHaveBeenCalledTimes(1);
-//     });
-//   });
+    expect(screen.getByDisplayValue('test@gmail.com')).toBeDefined();
+    expect(screen.getByDisplayValue('123456')).toBeDefined();
+  });
 });

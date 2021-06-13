@@ -1,5 +1,5 @@
 import React from "react";
-import { render, fireEvent } from "@testing-library/react";
+import { render, fireEvent, screen } from "@testing-library/react";
 import InputWithLabel from "../InputWithLabel";
 import { act } from "react-dom/test-utils";
 import AuthButton from "../AuthButton";
@@ -57,6 +57,7 @@ describe("Auth Button", () => {
 
     expect(container).toBeInTheDocument();
     expect(getByDisplayValue(value)).toBeDefined();
+    expect(screen.getByDisplayValue(value)).toBeDefined();
     expect(onClick).toHaveBeenCalled()
   });
 });

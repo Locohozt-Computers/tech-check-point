@@ -27,10 +27,10 @@ const InputWithLabel: React.FC<Props> = ({
 }) => {
   return (
     <div style={style}>
-      <Label htmlFor="input">{label} *</Label>
+      <Label htmlFor={name}>{label} *</Label>
       <Input
         type={type}
-        id="input"
+        id={name}
         value={value}
         name={name}
         placeholder={placeholder}

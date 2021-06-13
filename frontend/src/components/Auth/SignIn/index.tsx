@@ -6,7 +6,6 @@ import * as Yup from "yup";
 import AuthButton from "components/ui/AuthButton";
 import CustomButton from "components/ui/CustomButton";
 import InputWithLabel from "components/ui/InputWithLabel";
-// import CustomSwitch from "components/ui/Switch";
 import { Container, Form } from "./style";
 // import { AuthContext } from "context/auth/AuthProvider";
 import { SigninUserType } from "types/authTypes";
@@ -17,8 +16,6 @@ const SignInComponent: React.FC<{
 }> = ({ onSubmit }) => {
   // const { signInUserContext } = useContext(AuthContext);
   const history = useHistory();
-  // const [isAgent, setIsAgent] = useState(false);
-  const [error, setError] = useState("");
 
   const {
     handleSubmit,
@@ -42,8 +39,6 @@ const SignInComponent: React.FC<{
         .required(),
     }),
   });
-
-  console.log(errors)
 
   return (
     <Container>
@@ -72,12 +67,6 @@ const SignInComponent: React.FC<{
             marginBottom: 30,
           }}
         />
-        {/* <CustomSwitch
-          checked={isAgent}
-          onChange={(value) => setIsAgent(value)}
-          label={isAgent ? "Agent" : "User"}
-          style={{ marginBottom: 30 }}
-        /> */}
         <CustomButton
           testId="signin"
           label={"Submit"}
