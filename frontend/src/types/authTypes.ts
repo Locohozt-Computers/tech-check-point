@@ -1,13 +1,11 @@
 export type SignupUserType = {
     username: string;
     email: string;
-    provider_name: string;
-    provider_id: string;
     password: string;
     password_confirmation: string;
     referral_id: string;
     ip_address: string;
-    role_id: string;
+    role_id: number;
 }
 
 export type SigninUserType = Pick<SignupUserType, 'email' | 'password'>

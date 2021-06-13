@@ -1,42 +1,59 @@
-import React, { CSSProperties } from 'react'
-import styled from 'styled-components'
+import { ErrorLabel } from "components/Auth/common/style";
+import React, { CSSProperties } from "react";
+import styled from "styled-components";
 
 type Props = {
-    type?: string;
-    value?: string;
-    placeholder: string;
-    label: string;
-    onChange: (e: any) => void;
-    style?: CSSProperties;
-}
+  type?: string;
+  name?: string;
+  value?: string;
+  error?: string;
+  placeholder: string;
+  label: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  style?: CSSProperties;
+};
 
 const InputWithLabel: React.FC<Props> = ({
-    type = 'text',
-    placeholder,
-    label,
-    value = '',
-    onChange,
-    style
+  type = "text",
+  placeholder,
+  label,
+  error,
+  value = "",
+  name,
+  onChange,
+  onBlur,
+  style,
 }) => {
-    return (
-        <div style={style}>
-            <Label htmlFor="">{label}</Label>
-            <Input type={type} value={value} placeholder={placeholder} onChange={onChange} />
-        </div>
-    )
-}
+  return (
+    <div style={style}>
+      <Label htmlFor="input">{label} *</Label>
+      <Input
+        type={type}
+        id="input"
+        value={value}
+        name={name}
+        placeholder={placeholder}
+        onChange={onChange}
+        onBlur={onBlur}
+        data-testid="input"
+      />
+      <ErrorLabel htmlFor="input">{error}</ErrorLabel>
+    </div>
+  );
+};
 
 const Label = styled.label`
-    display: inline-block;
-    font-size: 14px;
-    margin-bottom: 5px;
-`
+  display: inline-block;
+  font-size: 14px;
+  margin-bottom: 5px;
+`;
 const Input = styled.input`
-    outline: none;
-    border: 1px solid #dddddd;
-    padding: 10px;
-    width: 100%;
-    border-radius: 4px;
-`
+  outline: none;
+  border: 1px solid #dddddd;
+  padding: 10px;
+  width: 100%;
+  border-radius: 4px;
+`;
 
-export default InputWithLabel
+export default InputWithLabel;

@@ -1,45 +1,90 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
 import AuthButton from "components/ui/AuthButton";
 import CustomButton from "components/ui/CustomButton";
 import InputWithLabel from "components/ui/InputWithLabel";
-import CustomSwitch from "components/ui/Switch";
-import { useHistory } from "react-router";
+// import CustomSwitch from "components/ui/Switch";
 import { Container, Form } from "./style";
+// import { AuthContext } from "context/auth/AuthProvider";
+import { SigninUserType } from "types/authTypes";
+import { ErrorLabel } from "../common/style";
 
-const SignInComponent = () => {
+const SignInComponent: React.FC<{
+  onSubmit: any;
+}> = ({ onSubmit }) => {
+  // const { signInUserContext } = useContext(AuthContext);
   const history = useHistory();
-  const [isAgent, setIsAgent] = useState(false);
+  // const [isAgent, setIsAgent] = useState(false);
+  const [error, setError] = useState("");
+
+  const {
+    handleSubmit,
+    values,
+    errors,
+    handleChange,
+    touched,
+    handleBlur,
+    isSubmitting,
+    getFieldProps,
+  } = useFormik<SigninUserType>({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    onSubmit,
+    validationSchema: Yup.object({
+      email: Yup.string().email().required(),
+      password: Yup.string()
+        .min(4, "Password must be more than 4 characters")
+        .required(),
+    }),
+  });
+
+  console.log(errors)
 
   return (
     <Container>
-      <Form>
+      <Form onSubmit={handleSubmit} data-testid="sign-in-form">
         <h1>Sign In</h1>
+        <ErrorLabel textAlign="center">{typeof errors === "string" ? errors : null}</ErrorLabel>
         <InputWithLabel
           placeholder="Enter Email"
           label="Email address"
-          onChange={() => {}}
+          error={touched && errors.email}
+          {...getFieldProps("email")}
           style={{
             marginBottom: 30,
           }}
         />
         <InputWithLabel
           placeholder="Enter Password"
+          type="password"
           label="Password"
-          onChange={() => {}}
+          error={touched && errors.password}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          name="password"
+          value={values.password}
           style={{
             marginBottom: 30,
           }}
         />
-        <CustomSwitch
+        {/* <CustomSwitch
           checked={isAgent}
           onChange={(value) => setIsAgent(value)}
           label={isAgent ? "Agent" : "User"}
           style={{ marginBottom: 30 }}
-        />
+        /> */}
         <CustomButton
-          label="Submit"
-          onClick={() => {}}
-          background={"#177BFF"}
+          testId="signin"
+          label={"Submit"}
+          type={"submit"}
+          disabled={isSubmitting}
+          background={isSubmitting ? "#f1f1f7" : "#177BFF"}
+          loading={isSubmitting}
         />
         <div className="flex">
           <p className="forgot-password">

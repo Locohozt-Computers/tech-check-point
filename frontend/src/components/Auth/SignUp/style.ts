@@ -5,10 +5,11 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  padding: 2% 0;
   background: #f1f1f7;
 `;
-export const Form = styled.div`
+export const Form = styled.form`
   max-width: 40%;
   width: 100%;
   min-height: 400px;

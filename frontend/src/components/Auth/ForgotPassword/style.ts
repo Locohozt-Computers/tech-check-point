@@ -8,8 +8,8 @@ export const Container = styled.div`
   height: 100vh;
   background: #f1f1f7;
 `;
-export const Form = styled.div`
-  max-width: 40%;
+export const Form = styled.form`
+  max-width: 400px;
   width: 100%;
   min-height: 300px;
   background: white;
